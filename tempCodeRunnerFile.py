@@ -1,0 +1,1 @@
+ndmark_list = calc_landmark_list(debug_image, hand)
