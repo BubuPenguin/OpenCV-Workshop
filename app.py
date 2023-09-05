@@ -13,7 +13,8 @@ from utils import CvFpsCalc
 from model import KeyPointClassifier
 from model import PointHistoryClassifier
 
-import LED_controller
+# Enable when arduino is attached (Remove the hashtag underneath)
+# import LED_controller 
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -60,7 +61,8 @@ def main():
     mp_hands = mp.solutions.hands
     hands = mp_hands.Hands(
         static_image_mode=use_static_image_mode,
-        max_num_hands=2,
+        #Change max number of hands if needed
+        max_num_hands=1,
         min_detection_confidence=min_detection_confidence,
         min_tracking_confidence=min_tracking_confidence,
     )
@@ -140,8 +142,9 @@ def main():
 
                 # Hand sign classification
                 hand_sign_id = keypoint_classifier(pre_processed_landmark_list)
+
                 # LED_controller. Disable if USB is screwing up code
-                LED_controller.light_LED(hand_sign_id)
+                # LED_controller.light_LED(hand_sign_id)
 
                 if hand_sign_id == 2:  # Point gesture
                     point_history.append(landmark_list[8])
